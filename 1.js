@@ -1,7 +1,8 @@
 var ps = require("prompt-sync");
 var prompt = ps();
 
-var rePlay = 'yes';
+console.log("Game info: \n There will be a random number between 1 and 100 \n you are going to guess what number it is, \n you will have 10 lives and every time you fail \n you will lose one and be told if the number is higher or lower.");
+var rePlay = prompt('Would you like to play a game?: ')
 var winStreak = 0;
 while ((rePlay == 'yes') || (rePlay == 'Yes')) {
 
@@ -13,12 +14,15 @@ while ((rePlay == 'yes') || (rePlay == 'Yes')) {
     var counter = 0;
 
     while (true){
+        var hp = 9 - counter;
+
         if (counter == 10) {
-            console.log('You are out of lives correct number was ' + randomNumber);
+            console.log('You are out of lives, the correct number was ' + randomNumber);
             winStreak = 0;
             break;
         }
-        let guessTheNumber = parseInt(prompt('Guess a number between ' + minNumber + '-' + maxNumber +": "));
+
+        var guessTheNumber = parseInt(prompt('Guess a number between ' + minNumber + '-' + maxNumber +": "));
 
         if ((guessTheNumber > maxNumber) || (guessTheNumber < minNumber)){
             console.log('Breh');
@@ -27,10 +31,12 @@ while ((rePlay == 'yes') || (rePlay == 'Yes')) {
         }
 
         if (randomNumber < guessTheNumber) {
-            console.log('The number is smaler');
+            console.log('Your HP is now = ', hp)
+            console.log('The number is smaller');
             maxNumber = (-1) + guessTheNumber 
         }
         else if (randomNumber > guessTheNumber) {
+            console.log('Your HP is now = ', hp)
             console.log('The number is larger');
             minNumber = 1 + guessTheNumber
         }
@@ -40,7 +46,7 @@ while ((rePlay == 'yes') || (rePlay == 'Yes')) {
             break;
         }
         else {
-            console.log('error');
+            console.log('Error! What did you do?')
             winStreak = 0;
             break;
         }
